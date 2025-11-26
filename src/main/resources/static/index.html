@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orda</title>
+</head>
+<body>
+    <!-- Esta es la tabla que hace el get a la api rest -->
+    <h1>
+        No tengo ni idea de lo que estoy haciendo
+    </h1>
+    <table id="enemigosTable" style="display:none">
+         <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Pais</th>
+                <th>Afiliacion</th>
+            </tr>
+         </thead>
+        <tbody id="enemigosBody">
+        </tbody>
+    </table>
+
+    <!-- Formulario para insertar enemigos -->
+    <div class="formulario-container">
+        <h2>Agregar nuevo enemigo</h2>
+        <form id="formInsertarEnemigo">
+            <div class="formGroup">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="formGroup">
+                <label for="pais">Pais</label>
+                <input type="text" id="pais" name="pais" required>
+            </div>
+            <div class="formGroup">
+                <label for="afiliacion">Afiliacion</label>
+                <input type="text" id="afiliacion" name="afiliacion" required>
+            </div>
+            <button type="submit" id="btnSubmit">Agregar enemigo</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
