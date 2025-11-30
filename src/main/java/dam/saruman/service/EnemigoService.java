@@ -32,4 +32,24 @@ public class EnemigoService {
         return (Enemigo)this.enemigoRepository.save(enemigo);
     }
 
+    public Enemigo editar(Enemigo enemigo) {
+        if(this.enemigoRepository.existsById((long) enemigo.getId())){
+            return (Enemigo) this.enemigoRepository.save(enemigo);
+        }else{
+            System.out.println("No se ha encontrado el enemigo "+enemigo.getNombre());
+            return null;
+        }
+
+    }
+
+    public boolean borrar(Long id) {
+        if(this.enemigoRepository.existsById(id)){
+            this.enemigoRepository.deleteById(id);
+            return true;
+        }else{
+            System.out.println("No se ha encontrado el enemigo con ID "+id);
+            return false;
+        }
+    }
+
 }

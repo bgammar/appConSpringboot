@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Orda</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Esta es la tabla que hace el get a la api rest -->
     <h1>
-        No tengo ni idea de lo que estoy haciendo
+        Tabla de enemigos
     </h1>
     <table id="enemigosTable" style="display:none">
          <thead>
@@ -28,18 +29,54 @@
         <h2>Agregar nuevo enemigo</h2>
         <form id="formInsertarEnemigo">
             <div class="formGroup">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <label for="nombreInsertar">Nombre</label>
+                <input type="text" id="nombreInsertar" name="nombreInsertar" required>
             </div>
             <div class="formGroup">
-                <label for="pais">Pais</label>
-                <input type="text" id="pais" name="pais" required>
+                <label for="paisInsertar">Pais</label>
+                <input type="text" id="paisInsertar" name="paisInsertar" required>
             </div>
             <div class="formGroup">
-                <label for="afiliacion">Afiliacion</label>
-                <input type="text" id="afiliacion" name="afiliacion" required>
+                <label for="afiliacionInsertar">Afiliacion</label>
+                <input type="text" id="afiliacionInsertar" name="afiliacionInsertar" required>
             </div>
-            <button type="submit" id="btnSubmit">Agregar enemigo</button>
+            <button type="submit" id="btnSubmitInsertar">Agregar enemigo</button>
+        </form>
+    </div>
+
+    <!-- Formulario para editar enemigos -->
+    <div class="formulario-container">
+        <h2>Editar enemigo existente</h2>
+        <form id="formEditarEnemigo">
+            <div class="formGroup">
+                <label for="idEdit">id</label>
+                <input type="text" id="idEdit" name="idEdit" required>
+            </div>
+            <div class="formGroup">
+                <label for="nombreEdit">Nombre</label>
+                <input type="text" id="nombreEdit" name="nombreEdit" required>
+            </div>
+            <div class="formGroup">
+                <label for="paisEdit">Pais</label>
+                <input type="text" id="paisEdit" name="paisEdit" required>
+            </div>
+            <div class="formGroup">
+                <label for="afiliacionEdit">Afiliacion</label>
+                <input type="text" id="afiliacionEdit" name="afiliacionEdit" required>
+            </div>
+            <button type="submit" id="btnSubmitEdit">Editar enemigo</button>
+        </form>
+    </div>
+
+    <!-- Formulario para borrar enemigos -->
+    <div class="formulario-container">
+        <h2>Borrar enemigo</h2>
+        <form id="formBorrarEnemigo">
+            <div class="formGroup">
+                <label for="idBorrar">Id</label>
+                <input type="text" id="idBorrar" name="idBorrar" required>
+            </div>
+            <button type="submit" id="btnSubmitBorrar">Borrar enemigo</button>
         </form>
     </div>
 

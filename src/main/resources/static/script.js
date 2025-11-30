@@ -8,19 +8,11 @@ async function cargarEnemigos(){
     }catch(error){
         console.error("Error all cargar usuarios "+error);
     }
-    tablestyle.display();
-
-    /*
-    ??
-    const tabla = document.getElementById('enemigosTable');
-        if (tabla) { // Verificar si el elemento existe
-            tabla.style.display = 'table';
-        }
-    */
 }
 
 async function mostrarEnemigos(enemigos){
     const tbody = document.getElementById('enemigosBody')
+    const table = document.getElementById('enemigosTable')
 
     tbody.innerHTML = '';
 
@@ -42,20 +34,25 @@ async function mostrarEnemigos(enemigos){
     table.style.display = 'table';
 }
 
-document.addElementById('formInsertatrEnemigo').addEventListener('submit', insertarEnemigo)
+document.getElementById('formInsertarEnemigo').addEventListener('submit', insertarEnemigo);
+document.getElementById('formEditarEnemigo').addEventListener('submit', editarEnemigo);
+document.getElementById('formBorrarEnemigo').addEventListener('submit', borrarEnemigo);
 
-async function insertarEnemigo(){
-    const nombre = document.getElementById('nombre').value;
-    const pais = document.getElementById('pais').value;
-    const afiliacion = document.getElementById('afiliacion').value;
-    const btnSubmit = document.getElementById('btnSubmit');
-    const nuevoEnemigo;
+
+async function insertarEnemigo(e){
+    e.preventDefault();
+    const nombre = document.getElementById('nombreInsertar').value;
+    const pais = document.getElementById('paisInsertar').value;
+    const afiliacion = document.getElementById('afiliacionInsertar').value;
+    const btnSubmit = document.getElementById('btnSubmitInsertar');
+
 
     //Esto es mientras se procesa
     btnSubmit.disabled=true;
     btnSubmit.textContent='Enviando a francia...';
 
     try{
+        console.log('mandando post...')
         const response = await fetch('api/enemigo', {
             method: 'POST',
             headers: {
@@ -70,8 +67,8 @@ async function insertarEnemigo(){
 
         if(response.ok){
             const nuevoEnemigo = await response.json();
-            document.getElementById('formInsertarEnemigo')
-            //await cargarEnemigos();
+            document.getElementById('formInsertarEnemigo').reset();
+            await cargarEnemigos();
         }else{
             const error = await response.text();
             console.log(error);
@@ -80,8 +77,91 @@ async function insertarEnemigo(){
     }catch(error){
         console.log(error);
     }finally{
-        btnSubmit.disable(false);
-        btnSubmit.textContext='Agregar Enemigo';
+        btnSubmit.disabled=false;
+        btnSubmit.textContent='Agregar Enemigo';
     } //fin try-catch
 } //fin insertar
 
+
+async function editarEnemigo(e){
+    e.preventDefault();
+    const id = document.getElementById('idEdit').value;
+    const nombre = document.getElementById('nombreEdit').value;
+    const pais = document.getElementById('paisEdit').value;
+    const afiliacion = document.getElementById('afiliacionEdit').value;
+    const btnSubmit = document.getElementById('btnSubmitEdit');
+
+
+    //Esto es mientras se procesa
+    btnSubmit.disabled=true;
+    btnSubmit.textContent='Editando...';
+
+    try{
+        console.log('mandando put...')
+        const response = await fetch('api/enemigo', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: parseInt(id),
+                nombre: nombre,
+                pais: pais,
+                afiliacion: afiliacion
+            })
+        });
+
+        if(response.ok){
+            const enemigoEditado = await response.json();
+            document.getElementById('formEditarEnemigo').reset();
+            await cargarEnemigos();
+        }else{
+            const error = await response.text();
+            console.log(error);
+        }
+
+    }catch(error){
+        console.log(error);
+    }finally{
+        btnSubmit.disabled=false;
+        btnSubmit.textContent='Editar Enemigo';
+    } //fin try-catch
+} //fin editar
+
+
+async function borrarEnemigo(e){
+    e.preventDefault();
+    const id = document.getElementById('idBorrar').value;
+    const btnSubmit = document.getElementById('btnSubmitBorrar');
+
+
+    //Esto es mientras se procesa
+    btnSubmit.disabled=true;
+    btnSubmit.textContent='Eliminando...';
+
+    try{
+        console.log('mandando delete...')
+        const response = await fetch('api/enemigo', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(parseInt(id))
+        });
+
+        if(response.ok){
+            const nuevoEnemigo = await response.json();
+            document.getElementById('formBorrarEnemigo').reset();
+            await cargarEnemigos();
+        }else{
+            const error = await response.text();
+            console.log(error);
+        }
+
+    }catch(error){
+        console.log(error);
+    }finally{
+        btnSubmit.disabled=false;
+        btnSubmit.textContent='Borrar Enemigo';
+    } //fin try-catch
+} //fin borrar
