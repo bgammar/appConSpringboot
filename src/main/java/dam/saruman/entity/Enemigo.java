@@ -1,38 +1,36 @@
 package dam.saruman.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name="enemigosestado")
+@Document(collection = "enemigos")
 public class Enemigo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
-    @Column
+    @Indexed(unique = true)
     private String nombre;
 
-    @Column
-    private String pais;
+    private String pais_origen;
 
-    @Column
     private String afiliacion;
 
     public Enemigo() {
     }
 
-    public Enemigo(int id, String nombre, String pais, String afiliacion) {
+    public Enemigo(String id, String nombre, String pais, String afiliacion) {
         this.id = id;
         this.nombre = nombre;
-        this.pais = pais;
+        this.pais_origen = pais;
         this.afiliacion = afiliacion;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -45,11 +43,11 @@ public class Enemigo {
     }
 
     public String getPais() {
-        return pais;
+        return pais_origen;
     }
 
     public void setPais(String pais) {
-        this.pais = pais;
+        this.pais_origen = pais;
     }
 
     public String getAfiliacion() {
@@ -58,5 +56,15 @@ public class Enemigo {
 
     public void setAfiliacion(String afiliacion) {
         this.afiliacion = afiliacion;
+    }
+
+    @Override
+    public String toString(){
+        return "Enemigo{"+
+                "id='"+id+'\''+
+                ", nombre='" +nombre+ '\''+
+                ", pais='" +pais_origen+ '\''+
+                ", afiliacion='" +afiliacion+ '\''+
+                '}';
     }
 }

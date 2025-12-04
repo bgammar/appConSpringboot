@@ -33,16 +33,15 @@ public class EnemigoService {
     }
 
     public Enemigo editar(Enemigo enemigo) {
-        if(this.enemigoRepository.existsById((long) enemigo.getId())){
+        if(this.enemigoRepository.existsById(enemigo.getId())){
             return (Enemigo) this.enemigoRepository.save(enemigo);
         }else{
             System.out.println("No se ha encontrado el enemigo "+enemigo.getNombre());
             return null;
         }
-
     }
 
-    public boolean borrar(Long id) {
+    public boolean borrar(String id) {
         if(this.enemigoRepository.existsById(id)){
             this.enemigoRepository.deleteById(id);
             return true;

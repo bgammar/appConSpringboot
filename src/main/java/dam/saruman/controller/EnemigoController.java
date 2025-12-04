@@ -34,7 +34,7 @@ public class EnemigoController {
     }
 
     @DeleteMapping("/enemigo")
-    public boolean borrarEnemigo(@RequestBody Long id) {
+    public boolean borrarEnemigo(@RequestBody String id) {
         System.out.println("Borrando enemigo enemigo con ID ------------ "+id);
         boolean resultado = this.enemigoService.borrar(id);
         if(resultado){
