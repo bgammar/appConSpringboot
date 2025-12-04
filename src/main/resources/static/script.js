@@ -141,17 +141,11 @@ async function borrarEnemigo(e){
 
     try{
         console.log('mandando delete...')
-        const response = await fetch('api/enemigo', {
+        const response = await fetch('api/enemigo' + idBorrar, {
             method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(parseInt(id))
         });
 
         if(response.ok){
-            const nuevoEnemigo = await response.json();
-            document.getElementById('formBorrarEnemigo').reset();
             await cargarEnemigos();
         }else{
             const error = await response.text();
